@@ -1,0 +1,14 @@
+{
+    "name": "hart0554/acquia_api",
+    "require": {
+        "league/oauth2-client": "^2.4",
+        "symfony/serializer": "^4.3",
+        "symfony/property-access": "^4.3"
+    },
+    "authors": [
+        {
+            "name": "Jim Hart",
+            "email": "HART0554@UMN.EDU"
+        }
+    ]
+}
