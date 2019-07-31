@@ -10,5 +10,10 @@
       "name": "Jim Hart",
       "email": "HART0554@UMN.EDU"
     }
-  ]
+  ],
+  "autoload": {
+    "psr-4": {
+      "Umndrupal\\acquia_api\\": "src/"
+    }
+  }
 }
