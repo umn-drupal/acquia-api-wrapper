@@ -97,7 +97,23 @@ class Application extends AcquiaResponse
   }
 
   /**
-   * @return \AcquiaAPI\Response\MultipleResponse
+   * @param string $databaseName
+   * @return \Umndrupal\acquia_api\Response\AcquiaResponse
+   */
+  public function createDatabase(string $databaseName)
+  {
+    $uri = "applications/{$this->uuid}/databases";
+    $options = [
+      'json' => [
+        'name' => $databaseName,
+      ],
+    ];
+    $response = $this->client->postRequest($uri, $options);
+    return new AcquiaResponse($response, $this->client);
+  }
+
+  /**
+   * @return \Umndrupal\acquia_api\Response\MultipleResponse
    */
   public function environments()
   {
