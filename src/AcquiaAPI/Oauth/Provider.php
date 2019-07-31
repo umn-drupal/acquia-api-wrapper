@@ -1,14 +1,15 @@
 <?php
 
 
-namespace AcquiaAPI\Oauth;
+namespace Umndrupal\acquia_api\Oauth;
 
 use GuzzleHttp\Psr7\Request;
 use League\OAuth2\Client\Provider\GenericProvider;
 use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 use League\OAuth2\Client\Token\AccessToken;
 
-class Provider extends GenericProvider {
+class Provider extends GenericProvider
+{
 
   public static $token_url = 'https://accounts.acquia.com/api/auth/oauth/token';
   public static $api_base = 'https://cloud.acquia.com/api/';

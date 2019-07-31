@@ -1,10 +1,9 @@
 <?php
 
 
-namespace AcquiaAPI\Response;
+namespace Umndrupal\acquia_api\Response;
 
-
-use AcquiaAPI\Client\Client;
+use Umndrupal\acquia_api\Client\Client;
 use InvalidArgumentException;
 
 class MultipleResponse extends AcquiaResponse implements \Iterator {

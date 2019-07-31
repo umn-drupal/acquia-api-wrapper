@@ -1,17 +1,13 @@
 <?php
 
+namespace Umndrupal\acquia_api\Client;
 
-namespace AcquiaAPI\Client;
-use AcquiaAPI\Response\Applications;
-use AcquiaAPI\Response\Application;
-use AcquiaAPI\Response\Environment;
-use AcquiaAPI\Response\MultipleResponse;
+use Umndrupal\acquia_api\Response\Application;
+use Umndrupal\acquia_api\Response\Environment;
+use Umndrupal\acquia_api\Response\MultipleResponse;
 use GuzzleHttp\Client as GClient;
-use AcquiaAPI\Oauth\Provider;
+use Umndrupal\acquia_api\Oauth\Provider;
 use GuzzleHttp\Exception\GuzzleException;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 
 class Client extends GClient {

@@ -1,12 +1,12 @@
 <?php
 
 
-namespace AcquiaAPI\Response;
+namespace Umndrupal\acquia_api\Response;
 
+use Umndrupal\acquia_api\Client\Client;
 
-use AcquiaAPI\Client\Client;
-
-class Environment extends AcquiaResponse {
+class Environment extends AcquiaResponse
+{
 
   /**
    * @var string

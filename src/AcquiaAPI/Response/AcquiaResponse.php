@@ -1,10 +1,10 @@
 <?php
 
 
-namespace AcquiaAPI\Response;
+namespace Umndrupal\acquia_api\Response;
 
 
-use AcquiaAPI\Client\Client;
+use Umndrupal\acquia_api\Client\Client;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;

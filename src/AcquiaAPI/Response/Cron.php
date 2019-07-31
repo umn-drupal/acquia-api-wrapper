@@ -1,12 +1,12 @@
 <?php
 
 
-namespace AcquiaAPI\Response;
+namespace Umndrupal\acquia_api\Response;
 
+use Umndrupal\acquia_api\Client\Client;
 
-use AcquiaAPI\Client\Client;
-
-class Cron extends AcquiaResponse {
+class Cron extends AcquiaResponse
+{
 
   /**
    * @var string
