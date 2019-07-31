@@ -7,7 +7,7 @@ use Umndrupal\acquia_api\Response\Environment;
 use Umndrupal\acquia_api\Response\MultipleResponse;
 use GuzzleHttp\Client as GClient;
 use Umndrupal\acquia_api\Oauth\Provider;
-use GuzzleHttp\Exception\GuzzleException;
+use Psr\Http\Message\RequestInterface;
 
 class Client extends GClient
 {
@@ -69,13 +69,9 @@ class Client extends GClient
    *
    * @return mixed|\Psr\Http\Message\ResponseInterface
    */
-  public function sendRequest(\Psr\Http\Message\RequestInterface $request, array $options = [])
+  public function sendRequest(RequestInterface $request, array $options = [])
   {
-    try {
-      return $this->send($request, $options);
-    } catch (GuzzleException $e) {
-      exit($e->getMessage());
-    }
+    return $this->send($request, $options);
   }
   //    $client = new Client(['base_uri' => self::$api_base]);
   //    $request = $this->provider->getAuthenticatedRequest('GET', 'applications/', $this->access_token);
