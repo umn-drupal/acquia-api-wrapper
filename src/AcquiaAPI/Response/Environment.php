@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Umndrupal\acquia_api\Response;
 
 use Umndrupal\acquia_api\Client\Client;
@@ -108,7 +107,8 @@ class Environment extends AcquiaResponse
    *
    * @inheritDoc
    */
-  public function __construct($response, Client $client) {
+  public function __construct($response, Client $client)
+  {
     parent::__construct($response, $client);
     $this->id = $this->decodedResponse['id'];
     $this->label = $this->decodedResponse['label'];
@@ -134,37 +134,43 @@ class Environment extends AcquiaResponse
   /**
    * @return string
    */
-  public function getId(): string {
+  public function getId(): string
+  {
     return $this->id;
   }
 
   /**
    * @return string
    */
-  public function getName(): string {
+  public function getName(): string
+  {
     return $this->name;
   }
 
   /**
    * @return string
    */
-  public function getApplication(): string {
+  public function getApplication(): string
+  {
     return $this->application;
   }
 
-  public function getCrons() {
+  public function getCrons()
+  {
     $uri = "environments/{$this->id}/crons";
     $response = $this->client->getRequest($uri);
     return new MultipleResponse($response, $this->client, 'Cron');
   }
 
-  public function databases() {
+  public function databases()
+  {
     $uri = "environments/{$this->getId()}/databases";
     $response = $this->client->getRequest($uri);
     return new MultipleResponse($response, $this->client, 'Database');
   }
 
-  public function getDomains() {
+  public function getDomains()
+  {
     $uri = "environments/{$this->id}/domains";
     $response = $this->client->getRequest($uri);
     return new AcquiaResponse($response, $this->client);
@@ -175,7 +181,8 @@ class Environment extends AcquiaResponse
    *
    * @return \AcquiaAPI\Response\AcquiaResponse
    */
-  public function addDomain(string $hostname) {
+  public function addDomain(string $hostname)
+  {
     $uri = "environments/{$this->id}/domains";
     $options = [
       'json' => [
@@ -191,7 +198,8 @@ class Environment extends AcquiaResponse
    *
    * @return \AcquiaAPI\Response\AcquiaResponse
    */
-  public function removeDomain(string $hostname) {
+  public function removeDomain(string $hostname)
+  {
     $uri = "environments/{$this->id}/domains/{$hostname}";
     $response = $this->client->deleteRequest($uri);
     return new AcquiaResponse($response, $this->client);
@@ -202,7 +210,8 @@ class Environment extends AcquiaResponse
    *
    * @return \AcquiaAPI\Response\AcquiaResponse
    */
-  public function clearVarnishOnDomains(array $domains) {
+  public function clearVarnishOnDomains(array $domains)
+  {
     $uri = "environments/{$this->id}/domains/actions/clear-varnish";
     $options = [
       'json' => [
@@ -213,7 +222,8 @@ class Environment extends AcquiaResponse
     return new AcquiaResponse($response, $this->client);
   }
 
-  public function __toString() {
+  public function __toString()
+  {
     $output = "Environment {$this->getName()} with ID {$this->getId()} and label {$this->label}.\n";
     return $output;
   }

@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Umndrupal\acquia_api\Response;
 
 use Umndrupal\acquia_api\Client\Client;
@@ -56,7 +55,8 @@ class Application extends AcquiaResponse
   /**
    * Application constructor.
    */
-  public function __construct($response, Client $client) {
+  public function __construct($response, Client $client)
+  {
     parent::__construct($response, $client);
     $this->id = $this->decodedResponse['id'];
     $this->uuid = $this->decodedResponse['uuid'];
@@ -72,21 +72,24 @@ class Application extends AcquiaResponse
   /**
    * @return string
    */
-  public function getUuid() {
+  public function getUuid()
+  {
     return $this->uuid;
   }
 
   /**
    * @return string
    */
-  public function getName() {
+  public function getName()
+  {
     return $this->name;
   }
 
   /**
    * @return array
    */
-  public function databases() {
+  public function databases()
+  {
     $uri = "applications/{$this->uuid}/databases";
     $response = $this->client->getRequest($uri);
     $acquia_response = new AcquiaResponse($response, $this->client);
@@ -96,14 +99,15 @@ class Application extends AcquiaResponse
   /**
    * @return \AcquiaAPI\Response\MultipleResponse
    */
-  public function environments() {
+  public function environments()
+  {
     $uri = "applications/{$this->uuid}/environments";
     $response = $this->client->getRequest($uri);
     return new MultipleResponse($response, $this->client, 'Environment');
   }
 
-  public function __toString() {
+  public function __toString()
+  {
     return "Application {$this->getName()} with UUID {$this->getUuid()}.\n";
   }
-
 }

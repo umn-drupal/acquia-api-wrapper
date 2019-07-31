@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Umndrupal\acquia_api\Response;
 
 use Umndrupal\acquia_api\Client\Client;
@@ -31,7 +30,8 @@ class Database extends AcquiaResponse
   /**
    * Database constructor.
    */
-  public function __construct($response, Client $client) {
+  public function __construct($response, Client $client)
+  {
     parent::__construct($response, $client);
     $this->id = $this->decodedResponse['id'];
     $this->name = $this->decodedResponse['name'];
@@ -43,31 +43,36 @@ class Database extends AcquiaResponse
   /**
    * @return string
    */
-  public function getEnvironmentId(): string {
+  public function getEnvironmentId(): string
+  {
     return $this->environmentId;
   }
 
   /**
    * @return string
    */
-  public function getApplicationId(): string {
+  public function getApplicationId(): string
+  {
     return $this->applicationId;
   }
 
   /**
    * @return string
    */
-  public function getName(): string {
+  public function getName(): string
+  {
     return $this->name;
   }
 
-  public function backups() {
+  public function backups()
+  {
     $uri = "environments/{$this->getEnvironmentId()}/databases/{$this->name}/backups";
     $response = $this->client->getRequest($uri);
     return new MultipleResponse($response, $this->client, 'Backup');
   }
 
-  public function createBackup() {
+  public function createBackup()
+  {
     $uri = "environments/{$this->getEnvironmentId()}/databases/{$this->name}/backups";
     $response = $this->client->postRequest($uri);
     return new AcquiaResponse($response, $this->client);

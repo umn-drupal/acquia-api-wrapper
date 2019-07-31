@@ -9,27 +9,28 @@ use GuzzleHttp\Client as GClient;
 use Umndrupal\acquia_api\Oauth\Provider;
 use GuzzleHttp\Exception\GuzzleException;
 
-
-class Client extends GClient {
+class Client extends GClient
+{
 
   /**
    * @var Provider
    */
   private $provider;
 
-  public function __construct($key, $secret, array $config = []) {
+  public function __construct($key, $secret, array $config = [])
+  {
     $config['base_uri'] = Provider::$api_base;
     $this->provider = new Provider($key, $secret);
     parent::__construct($config);
   }
 
-  public function applications($applicationId = '') {
+  public function applications($applicationId = '')
+  {
     $uri = 'applications/' . $applicationId;
     $response = $this->getRequest($uri);
     if (!empty($applicationId)) {
       return new Application($response, $this);
-    }
-    else {
+    } else {
       return new MultipleResponse($response, $this, 'Application');
     }
   }
@@ -37,24 +38,28 @@ class Client extends GClient {
   /**
    * @param string $environmentId
    */
-  public function environment($environmentId) {
+  public function environment($environmentId)
+  {
     $uri = 'environments/' . $environmentId;
     $response = $this->getRequest($uri);
     return new Environment($response, $this);
   }
 
-  public function getRequest($uri) {
+  public function getRequest($uri)
+  {
     $request = $this->provider->request('GET', $uri);
     return $this->sendRequest($request);
   }
 
-  public function postRequest($uri, array $options = []) {
+  public function postRequest($uri, array $options = [])
+  {
     $request = $this->provider->request('POST', $uri, $options);
-//    $test = $this->request('POST', $uri, $options);
+    //    $test = $this->request('POST', $uri, $options);
     return $this->sendRequest($request, $options);
   }
 
-  public function deleteRequest($uri) {
+  public function deleteRequest($uri)
+  {
     $request = $this->provider->request('DELETE', $uri);
     return $this->sendRequest($request);
   }
@@ -64,11 +69,11 @@ class Client extends GClient {
    *
    * @return mixed|\Psr\Http\Message\ResponseInterface
    */
-  public function sendRequest(\Psr\Http\Message\RequestInterface $request, array $options = []) {
+  public function sendRequest(\Psr\Http\Message\RequestInterface $request, array $options = [])
+  {
     try {
       return $this->send($request, $options);
-    }
-    catch (GuzzleException $e) {
+    } catch (GuzzleException $e) {
       exit($e->getMessage());
     }
   }

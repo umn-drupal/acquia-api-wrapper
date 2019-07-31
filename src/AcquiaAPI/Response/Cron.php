@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Umndrupal\acquia_api\Response;
 
 use Umndrupal\acquia_api\Client\Client;
@@ -65,7 +64,8 @@ class Cron extends AcquiaResponse
   /**
    * @inheritDoc
    */
-  public function __construct($response, Client $client) {
+  public function __construct($response, Client $client)
+  {
     parent::__construct($response, $client);
     $this->id = $this->decodedResponse['id'];
     $this->server = $this->decodedResponse['server'];
@@ -83,38 +83,45 @@ class Cron extends AcquiaResponse
   /**
    * @return string
    */
-  public function getId(): string {
+  public function getId(): string
+  {
     return $this->id;
   }
 
   /**
    * @return string
    */
-  public function getCommand(): string {
+  public function getCommand(): string
+  {
     return $this->command;
   }
 
-  public function enabled() : bool {
+  public function enabled(): bool
+  {
     return $this->flags['enabled'];
   }
 
-  public function getFrequency() : string {
+  public function getFrequency(): string
+  {
     return "{$this->minute} {$this->hour} {$this->day_month} {$this->month} {$this->day_week}";
   }
 
-  public function enableCron() : AcquiaResponse {
+  public function enableCron(): AcquiaResponse
+  {
     $uri = "environments/{$this->environment['id']}/crons/{$this->id}/actions/enable";
     $request = $this->client->postRequest($uri);
     return new AcquiaResponse($request, $this->client);
   }
 
-  public function disableCron() : AcquiaResponse {
+  public function disableCron(): AcquiaResponse
+  {
     $uri = "environments/{$this->environment['id']}/crons/{$this->id}/actions/disable";
     $request = $this->client->postRequest($uri);
     return new AcquiaResponse($request, $this->client);
   }
 
-  public function __toString() {
+  public function __toString()
+  {
     return "Cron command: {$this->command}\nFrequency: {$this->getFrequency()}";
   }
 }

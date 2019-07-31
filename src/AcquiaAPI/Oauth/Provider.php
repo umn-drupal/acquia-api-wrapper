@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Umndrupal\acquia_api\Oauth;
 
 use GuzzleHttp\Psr7\Request;
@@ -21,7 +20,8 @@ class Provider extends GenericProvider
    * @param $id
    * @param $secret
    */
-  public function __construct($id, $secret) {
+  public function __construct($id, $secret)
+  {
 
     parent::__construct([
       'clientId' => $id,
@@ -32,22 +32,22 @@ class Provider extends GenericProvider
     ]);
   }
 
-  private function getToken() {
+  private function getToken()
+  {
     try {
 
       // Try to get an access token using the client credentials grant.
       $accessToken = $this->getAccessToken('client_credentials');
       $this->access_token = $accessToken;
-
     } catch (IdentityProviderException $e) {
 
       // Failed to get the access token
       exit($e->getMessage());
-
     }
   }
 
-  private function refreshToken() {
+  private function refreshToken()
+  {
     try {
       $token = $this->getAccessToken('refresh_token', [
         'refresh_token' => $this->access_token->getRefreshToken()
@@ -58,32 +58,29 @@ class Provider extends GenericProvider
 
       // Failed to refresh the access token
       exit($e->getMessage());
-
     }
   }
 
-  public function request($method, $uri, array $options = []) {
+  public function request($method, $uri, array $options = [])
+  {
     if (!$this->access_token instanceof AccessToken) {
       $this->getToken();
-    }
-    else if ($this->access_token->hasExpired()) {
+    } else if ($this->access_token->hasExpired()) {
       // Initial token request does not appear to supply refresh token, but leave
       // the call to refreshToken() here in case that changes.
       if (is_null($this->access_token->getRefreshToken())) {
         $this->getToken();
-      }
-      else {
+      } else {
         $this->refreshToken();
       }
     }
 
-//    if ($method === 'POST') {
-//      $headers = $this->getHeaders($this->access_token);
-//      $options['headers'] = $headers;
-//      return new Request();
-//    }
+    //    if ($method === 'POST') {
+    //      $headers = $this->getHeaders($this->access_token);
+    //      $options['headers'] = $headers;
+    //      return new Request();
+    //    }
 
     return $this->getAuthenticatedRequest($method, $uri, $this->access_token, $options);
   }
-
 }

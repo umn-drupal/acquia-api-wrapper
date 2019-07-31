@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Umndrupal\acquia_api\Response;
 
 use Umndrupal\acquia_api\Client\Client;
@@ -38,7 +37,8 @@ class Backup extends AcquiaResponse
    */
   protected $completed;
 
-  public function __construct($response, Client $client) {
+  public function __construct($response, Client $client)
+  {
     parent::__construct($response, $client);
     $this->id = $this->decodedResponse['id'];
     $this->database = $this->decodedResponse['database'];
@@ -48,12 +48,14 @@ class Backup extends AcquiaResponse
     $this->completed = $this->decodedResponse['completed_at'];
   }
 
-  public function download() {
+  public function download()
+  {
     $uri = "environments/{$this->environment['id']}/databases/{$this->database['name']}/backups/{$this->id}/actions/download";
     $databaseFileResponse = $this->client->getRequest($uri);
   }
 
-  public function delete() {
+  public function delete()
+  {
     $uri = "environments/{$this->environment['id']}/databases/{$this->database['name']}/backups/{$this->id}";
     $response = $this->client->deleteRequest($uri);
     return new AcquiaResponse($response, $this->client);
@@ -62,28 +64,32 @@ class Backup extends AcquiaResponse
   /**
    * @return int
    */
-  public function getId(): int {
+  public function getId(): int
+  {
     return $this->id;
   }
 
   /**
    * @return bool
    */
-  public function daily(): bool {
+  public function daily(): bool
+  {
     return $this->type === 'daily';
   }
 
   /**
    * @return bool
    */
-  public function onDemand() : bool {
+  public function onDemand(): bool
+  {
     return $this->type === 'ondemand';
   }
 
   /**
    * @return string
    */
-  public function getCompleted(): \DateTime {
+  public function getCompleted(): \DateTime
+  {
     return new \DateTime($this->completed);
   }
 }

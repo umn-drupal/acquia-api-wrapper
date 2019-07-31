@@ -1,16 +1,17 @@
 <?php
 
-
 namespace Umndrupal\acquia_api\Response;
 
 use Umndrupal\acquia_api\Client\Client;
 use InvalidArgumentException;
 
-class MultipleResponse extends AcquiaResponse implements \Iterator {
+class MultipleResponse extends AcquiaResponse implements \Iterator
+{
   protected $items;
   private $position;
   private $responseType;
-  public function __construct($response, Client $client, $responseType) {
+  public function __construct($response, Client $client, $responseType)
+  {
     $this->position = 0;
     $this->responseType = $responseType;
     $types = $this->getValidTypes();
@@ -20,13 +21,14 @@ class MultipleResponse extends AcquiaResponse implements \Iterator {
       );
     }
     parent::__construct($response, $client);
-    $this->items = array_map(function($item) use ($client, $responseType) {
+    $this->items = array_map(function ($item) use ($client, $responseType) {
       $reflectionClass = new \ReflectionClass('\\AcquiaAPI\\Response\\' . $responseType);
       return $reflectionClass->newInstanceArgs([$item, $client]);
     }, $this->getEmbeddedItems());
   }
 
-  protected function getValidTypes() {
+  protected function getValidTypes()
+  {
     return [
       'Application',
       'Database',
@@ -36,29 +38,34 @@ class MultipleResponse extends AcquiaResponse implements \Iterator {
     ];
   }
 
-  public function current() {
+  public function current()
+  {
     return $this->items[$this->position];
   }
 
-  public function next() {
+  public function next()
+  {
     $this->position += 1;
   }
 
-  public function key() {
+  public function key()
+  {
     return $this->position;
   }
 
-  public function valid() {
-    return(isset($this->items[$this->position]));
+  public function valid()
+  {
+    return (isset($this->items[$this->position]));
   }
 
-  public function rewind() {
+  public function rewind()
+  {
     $this->position = 0;
   }
 
-  public function __toString() {
+  public function __toString()
+  {
     $count = count($this->items);
     return "This is a collection of {$count} {$this->responseType} items.\n";
   }
-
 }
