@@ -22,7 +22,7 @@ class MultipleResponse extends AcquiaResponse implements \Iterator
     }
     parent::__construct($response, $client);
     $this->items = array_map(function ($item) use ($client, $responseType) {
-      $reflectionClass = new \ReflectionClass('\\AcquiaAPI\\Response\\' . $responseType);
+      $reflectionClass = new \ReflectionClass('\\Umndrupal\\acquia_api\\Response\\' . $responseType);
       return $reflectionClass->newInstanceArgs([$item, $client]);
     }, $this->getEmbeddedItems());
   }
