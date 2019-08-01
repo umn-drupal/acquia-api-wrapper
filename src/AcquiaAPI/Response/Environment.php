@@ -173,7 +173,8 @@ class Environment extends AcquiaResponse
   {
     $uri = "environments/{$this->id}/domains";
     $response = $this->client->getRequest($uri);
-    return new AcquiaResponse($response, $this->client);
+    $acquia_response = new AcquiaResponse($response, $this->client);
+    return $acquia_response->getEmbeddedItems();
   }
 
   /**
