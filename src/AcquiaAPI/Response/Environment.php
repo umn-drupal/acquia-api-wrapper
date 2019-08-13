@@ -23,12 +23,12 @@ class Environment extends AcquiaResponse
   protected $name;
 
   /**
-   * @var string
+   * @var array
    */
   protected $application;
 
   /**
-   * @var string
+   * @var array
    */
   protected $domains;
 
