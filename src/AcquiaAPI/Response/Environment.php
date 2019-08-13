@@ -171,10 +171,21 @@ class Environment extends AcquiaResponse
 
   public function getDomains()
   {
+    if (count($this->domains) === 0) {
+      $this->setDomains();
+    }
+    return $this->domains;
+  }
+
+  protected function setDomains()
+  {
     $uri = "environments/{$this->id}/domains";
     $response = $this->client->getRequest($uri);
     $acquia_response = new AcquiaResponse($response, $this->client);
-    return $acquia_response->getEmbeddedItems();
+    $domains = array_map(function ($i) {
+      return $i['hostname'];
+    }, $acquia_response->getEmbeddedItems());
+    $this->domains = $domains;
   }
 
   /**
