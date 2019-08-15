@@ -173,7 +173,7 @@ class Environment extends AcquiaResponse
     $uri = "environments/{$this->getId()}/databases";
     $options = [
       'json' => [
-        'name' => $databaseName
+        'name' => $databaseName,
         'source' => $sourceEnvironment->getId(),
       ],
     ];
