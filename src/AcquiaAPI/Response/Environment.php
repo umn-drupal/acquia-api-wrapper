@@ -181,6 +181,11 @@ class Environment extends AcquiaResponse
     return new AcquiaResponse($response, $this->client);
   }
 
+  /**
+   * Gets list of domains associated with this environment.
+   *
+   * @return array
+   */
   public function getDomains()
   {
     if (count($this->domains) === 0) {
@@ -244,6 +249,16 @@ class Environment extends AcquiaResponse
     ];
     $response = $this->client->postRequest($uri, $options);
     return new AcquiaResponse($response, $this->client);
+  }
+
+  /**
+   * Get information about code deployed to environment.
+   *
+   * @return array
+   */
+  public function getVcs()
+  {
+    return $this->vcs;
   }
 
   public function __toString()
