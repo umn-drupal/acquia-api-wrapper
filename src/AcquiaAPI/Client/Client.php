@@ -45,10 +45,10 @@ class Client extends GClient
     return new Environment($response, $this);
   }
 
-  public function getRequest($uri)
+  public function getRequest($uri, $options = [])
   {
     $request = $this->provider->request('GET', $uri);
-    return $this->sendRequest($request);
+    return $this->sendRequest($request, $options);
   }
 
   public function postRequest($uri, array $options = [])

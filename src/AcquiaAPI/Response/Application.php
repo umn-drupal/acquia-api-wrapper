@@ -122,6 +122,27 @@ class Application extends AcquiaResponse
     return new MultipleResponse($response, $this->client, 'Environment');
   }
 
+  /**
+   * @param int $total
+   *
+   * @return array
+   */
+  public function notifications($total = 50)
+  {
+    $uri = "applications/{$this->uuid}/notifications";
+    // Currently API doesn't allow sort by date, so we can't use the limit
+    // param. Until then, reverse the array and slice it, @todo replace with
+    // sort and limit when available.
+    $response = $this->client->getRequest($uri);//, ['query' => ['limit' => $total]]);
+    $acquia_response = new AcquiaResponse($response, $this->client);
+    $notifications = array_slice(
+      array_reverse($acquia_response->getEmbeddedItems()),
+      0,
+      $total
+    );
+    return $notifications;
+  }
+
   public function __toString()
   {
     return "Application {$this->getName()} with UUID {$this->getUuid()}.\n";
