@@ -208,7 +208,7 @@ class Environment extends AcquiaResponse
   /**
    * @param string $hostname
    *
-   * @return \AcquiaAPI\Response\AcquiaResponse
+   * @return \Umndrupal\acquia_api\Response\AcquiaResponse
    */
   public function addDomain(string $hostname)
   {
@@ -225,7 +225,7 @@ class Environment extends AcquiaResponse
   /**
    * @param string $hostname
    *
-   * @return \AcquiaAPI\Response\AcquiaResponse
+   * @return \Umndrupal\acquia_api\Response\AcquiaResponse
    */
   public function removeDomain(string $hostname)
   {
@@ -237,7 +237,7 @@ class Environment extends AcquiaResponse
   /**
    * @param string[] $domains
    *
-   * @return \AcquiaAPI\Response\AcquiaResponse
+   * @return \Umndrupal\acquia_api\Response\AcquiaResponse
    */
   public function clearVarnishOnDomains(array $domains)
   {
