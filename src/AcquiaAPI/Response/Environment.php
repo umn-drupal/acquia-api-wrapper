@@ -73,7 +73,7 @@ class Environment extends AcquiaResponse
   protected $size;
 
   /**
-   * @var integer
+   * @var int
    */
   protected $weight;
 
@@ -212,6 +212,8 @@ class Environment extends AcquiaResponse
    */
   public function addDomain(string $hostname)
   {
+    // unset domains since we're changing them
+    $this->domains = [];
     $uri = "environments/{$this->id}/domains";
     $options = [
       'json' => [
@@ -229,6 +231,8 @@ class Environment extends AcquiaResponse
    */
   public function removeDomain(string $hostname)
   {
+    // unset domains since we're changing them
+    $this->domains = [];
     $uri = "environments/{$this->id}/domains/{$hostname}";
     $response = $this->client->deleteRequest($uri);
     return new AcquiaResponse($response, $this->client);
