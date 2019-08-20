@@ -106,14 +106,14 @@ class Cron extends AcquiaResponse
     return "{$this->minute} {$this->hour} {$this->day_month} {$this->month} {$this->day_week}";
   }
 
-  public function enableCron(): AcquiaResponse
+  public function enableCron()
   {
     $uri = "environments/{$this->environment['id']}/crons/{$this->id}/actions/enable";
     $request = $this->client->postRequest($uri);
     return new AcquiaResponse($request, $this->client);
   }
 
-  public function disableCron(): AcquiaResponse
+  public function disableCron()
   {
     $uri = "environments/{$this->environment['id']}/crons/{$this->id}/actions/disable";
     $request = $this->client->postRequest($uri);

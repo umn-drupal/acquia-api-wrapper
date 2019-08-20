@@ -75,12 +75,6 @@ class Provider extends GenericProvider
       }
     }
 
-    //    if ($method === 'POST') {
-    //      $headers = $this->getHeaders($this->access_token);
-    //      $options['headers'] = $headers;
-    //      return new Request();
-    //    }
-
     return $this->getAuthenticatedRequest($method, $uri, $this->access_token, $options);
   }
 }

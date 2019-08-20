@@ -73,9 +73,5 @@ class Client extends GClient
   {
     return $this->send($request, $options);
   }
-  //    $client = new Client(['base_uri' => self::$api_base]);
-  //    $request = $this->provider->getAuthenticatedRequest('GET', 'applications/', $this->access_token);
-  //    $response = $client->send($request);
-  //    print_r($response->getBody()->getContents());
 
 }

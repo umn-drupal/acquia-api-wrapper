@@ -127,7 +127,7 @@ class Application extends AcquiaResponse
    *
    * @return array
    */
-  public function notifications($total = 50)
+  public function notifications($total = 50): array
   {
     $uri = "applications/{$this->uuid}/notifications";
     // Currently API doesn't allow sort by date, so we can't use the limit

@@ -19,7 +19,7 @@ class AcquiaResponse
    * AcquiaResponse constructor.
    *
    * @param array|string|\GuzzleHttp\Psr7\Response $response
-   * @param \AcquiaAPI\Client\Client $client
+   * @param \Umndrupal\acquia_api\Client\Client $client
    */
   public function __construct($response, Client $client)
   {

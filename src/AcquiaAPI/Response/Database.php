@@ -23,7 +23,7 @@ class Database extends AcquiaResponse
   protected $applicationId;
 
   /**
-   * @var \AcquiaAPI\Client\Client
+   * @var \Umndrupal\acquia_api\Client\Client
    */
   protected $client;
 

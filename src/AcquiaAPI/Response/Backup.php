@@ -88,7 +88,7 @@ class Backup extends AcquiaResponse
   /**
    * @return string
    */
-  public function getCompleted(): \DateTime
+  public function getCompleted()
   {
     return new \DateTime($this->completed);
   }
