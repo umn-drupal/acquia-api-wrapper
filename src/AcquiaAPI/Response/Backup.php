@@ -51,7 +51,7 @@ class Backup extends AcquiaResponse
   public function download()
   {
     $uri = "environments/{$this->environment['id']}/databases/{$this->database['name']}/backups/{$this->id}/actions/download";
-    $databaseFileResponse = $this->client->getRequest($uri);
+    return $this->client->getRequest($uri);
   }
 
   public function delete()
