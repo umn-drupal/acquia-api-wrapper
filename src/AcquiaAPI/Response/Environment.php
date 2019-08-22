@@ -162,11 +162,16 @@ class Environment extends AcquiaResponse
     return new MultipleResponse($response, $this->client, 'Cron');
   }
 
-  public function databases()
+  public function databases($databaseName = '')
   {
-    $uri = "environments/{$this->getId()}/databases";
+    $uri = "environments/{$this->getId()}/databases/" . $databaseName;
     $response = $this->client->getRequest($uri);
-    return new MultipleResponse($response, $this->client, 'Database');
+    if (!empty($databaseName)) {
+      return new Database($response, $this->client);
+    }
+    else {
+      return new MultipleResponse($response, $this->client, 'Database');
+    }
   }
 
   public function copyDatabaseToEnv($databaseName, Environment $sourceEnvironment) {
