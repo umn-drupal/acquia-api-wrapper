@@ -57,4 +57,9 @@ class AcquiaResponse
   {
     return $this->decodedResponse;
   }
+
+  public function getLinks(): array
+  {
+    return !empty($this->links) ? $this->links : [];
+  }
 }
