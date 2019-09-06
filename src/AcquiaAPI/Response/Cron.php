@@ -67,17 +67,26 @@ class Cron extends AcquiaResponse
   public function __construct($response, Client $client)
   {
     parent::__construct($response, $client);
-    $this->id = $this->decodedResponse['id'];
-    $this->server = $this->decodedResponse['server'];
-    $this->command = $this->decodedResponse['command'];
-    $this->minute = $this->decodedResponse['minute'];
-    $this->hour = $this->decodedResponse['hour'];
-    $this->day_month = $this->decodedResponse['day_month'];
-    $this->month = $this->decodedResponse['month'];
-    $this->day_week = $this->decodedResponse['day_week'];
-    $this->label = $this->decodedResponse['label'];
-    $this->flags = $this->decodedResponse['flags'];
-    $this->environment = $this->decodedResponse['environment'];
+    $properties = [
+      'id',
+      'server',
+      'command',
+      'minute',
+      'hour',
+      'day_month',
+      'month',
+      'day_week',
+      'label',
+      'flags',
+      'environment',
+    ];
+    foreach ($properties as $prop) {
+      if (!empty($this->decodedResponse[$prop])) {
+        $this->{$prop} = $this->decodedResponse[$prop];
+      } else {
+        $this->{$prop} = null;
+      }
+    }
   }
 
   /**

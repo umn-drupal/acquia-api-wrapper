@@ -40,12 +40,21 @@ class Backup extends AcquiaResponse
   public function __construct($response, Client $client)
   {
     parent::__construct($response, $client);
-    $this->id = $this->decodedResponse['id'];
-    $this->database = $this->decodedResponse['database'];
-    $this->environment = $this->decodedResponse['environment'];
-    $this->type = $this->decodedResponse['type'];
-    $this->started = $this->decodedResponse['started_at'];
-    $this->completed = $this->decodedResponse['completed_at'];
+    $properties = [
+      'id',
+      'database',
+      'environment',
+      'type',
+      'started_at',
+      'completed_at',
+    ];
+    foreach ($properties as $prop) {
+      if (!empty($this->decodedResponse[$prop])) {
+        $this->{$prop} = $this->decodedResponse[$prop];
+      } else {
+        $this->{$prop} = null;
+      }
+    }
   }
 
   public function download()

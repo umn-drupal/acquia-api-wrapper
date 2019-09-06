@@ -110,25 +110,33 @@ class Environment extends AcquiaResponse
   public function __construct($response, Client $client)
   {
     parent::__construct($response, $client);
-    $this->id = $this->decodedResponse['id'];
-    $this->label = $this->decodedResponse['label'];
-    $this->name = $this->decodedResponse['name'];
-    $this->application = $this->decodedResponse['application'];
-    $this->domains = $this->decodedResponse['domains'];
-    $this->activeDomain = $this->decodedResponse['active_domain'];
-    $this->defaultDomain = $this->decodedResponse['default_domain'];
-    $this->imageUrl = $this->decodedResponse['image_url'];
-    $this->sshUrl = $this->decodedResponse['ssh_url'];
-    $this->region = $this->decodedResponse['region'];
-    $this->status = $this->decodedResponse['status'];
-    $this->type = $this->decodedResponse['type'];
-    $this->size = $this->decodedResponse['size'];
-    $this->weight = $this->decodedResponse['weight'];
-    $this->vcs = $this->decodedResponse['vcs'];
-    //  $this->insight = $this->decodedResponse['insight'];
-    $this->flags = $this->decodedResponse['flags'];
-    $this->configuration = $this->decodedResponse['configuration'];
-    $this->artifact = $this->decodedResponse['artifact'];
+    $properties = [
+      'id',
+      'label',
+      'name',
+      'application',
+      'domains',
+      'active_domain',
+      'default_domain',
+      'image_url',
+      'ssh_url',
+      'region',
+      'status',
+      'type',
+      'size',
+      'weight',
+      'vcs',
+      'flags',
+      'configuration',
+      'artifact',
+    ];
+    foreach ($properties as $prop) {
+      if (!empty($this->decodedResponse[$prop])) {
+        $this->{$prop} = $this->decodedResponse[$prop];
+      } else {
+        $this->{$prop} = null;
+      }
+    }
   }
 
   /**

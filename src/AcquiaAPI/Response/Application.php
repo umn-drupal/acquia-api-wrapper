@@ -58,15 +58,24 @@ class Application extends AcquiaResponse
   public function __construct($response, Client $client)
   {
     parent::__construct($response, $client);
-    $this->id = $this->decodedResponse['id'];
-    $this->uuid = $this->decodedResponse['uuid'];
-    $this->name = $this->decodedResponse['name'];
-    $this->hosting = $this->decodedResponse['hosting'];
-    $this->subscription = $this->decodedResponse['subscription'];
-    $this->organization = $this->decodedResponse['organization'];
-    $this->flags = $this->decodedResponse['flags'];
-    $this->status = $this->decodedResponse['status'];
-    $this->type = $this->decodedResponse['type'];
+    $properties = [
+      'id',
+      'uuid',
+      'name',
+      'hosting',
+      'subscription',
+      'organization',
+      'flags',
+      'status',
+      'type',
+    ];
+    foreach ($properties as $prop) {
+      if (!empty($this->decodedResponse[$prop])) {
+        $this->{$prop} = $this->decodedResponse[$prop];
+      } else {
+        $this->{$prop} = null;
+      }
+    }
   }
 
   /**
