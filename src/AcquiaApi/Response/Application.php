@@ -3,6 +3,7 @@
 namespace Umndrupal\acquia_api\Response;
 
 use Umndrupal\acquia_api\Client\Client;
+use Umndrupal\acquia_api\Response\Environment;
 
 class Application extends AcquiaResponse
 {
@@ -129,6 +130,16 @@ class Application extends AcquiaResponse
     $uri = "applications/{$this->uuid}/environments";
     $response = $this->client->getRequest($uri);
     return new MultipleResponse($response, $this->client, 'Environment');
+  }
+  
+  /**
+   * @return \Umndrupal\acquia_api\Response\Environment
+   */
+  public function environment($environment_id)
+  {
+    $uri = "applications/{$this->uuid}/environments/{$environment_id}";
+    $response = $this->client->getRequest($uri);
+    return new Environment($response, $this->client);
   }
 
   /**
