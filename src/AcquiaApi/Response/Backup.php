@@ -69,6 +69,13 @@ class Backup extends AcquiaResponse
     $response = $this->client->deleteRequest($uri);
     return new AcquiaResponse($response, $this->client);
   }
+  
+  public function restore()
+  {
+    $uri = "environments/{$this->environment['id']}/databases/{$this->database['name']}/backups/{$this->id}/actions/restore";
+    $request = $this->client->postRequest($uri);
+    return new AcquiaResponse($request, $this->client);
+  }
 
   /**
    * @return int
