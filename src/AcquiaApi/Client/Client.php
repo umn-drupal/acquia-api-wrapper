@@ -5,6 +5,7 @@ namespace Umndrupal\acquia_api\Client;
 use Umndrupal\acquia_api\Response\Application;
 use Umndrupal\acquia_api\Response\Environment;
 use Umndrupal\acquia_api\Response\MultipleResponse;
+use Umndrupal\acquia_api\Response\Logs;
 use GuzzleHttp\Client as GClient;
 use Umndrupal\acquia_api\Oauth\Provider;
 use Psr\Http\Message\RequestInterface;
@@ -27,7 +28,7 @@ class Client extends GClient
   public function applications($applicationId = '')
   {
     $uri = 'applications/' . $applicationId;
-    $response = $this->getRequest($uri);
+      $response = $this->getRequest($uri);
     if (!empty($applicationId)) {
       return new Application($response, $this);
     } else {
@@ -43,6 +44,14 @@ class Client extends GClient
     $uri = 'environments/' . $environmentId;
     $response = $this->getRequest($uri);
     return new Environment($response, $this);
+  }
+
+  public function logs($log_types) {
+    $this->id = $log_types['id'];
+    $this->log_type = $log_types['log_type'];
+    $uri = 'environments/' . $log_types['id'] . '/logs';
+    $response = $this->getRequest($uri);
+    return new Logs($response, $this);
   }
 
   public function getRequest($uri, $options = [])
