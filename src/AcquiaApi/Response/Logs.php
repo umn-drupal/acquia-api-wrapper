@@ -37,9 +37,9 @@ class Logs extends AcquiaResponse {
     ];
     foreach ($properties as $prop) {
       if (!empty($this->decodedResponse[$prop])) {
-        $this->{$prop} = $this->decodedResponse[$prop];
+        $this->$prop = $this->decodedResponse[$prop];
       } else {
-        $this->{$prop} = null;
+        $this->$prop = null;
       }
     }
   }
@@ -90,9 +90,8 @@ class Logs extends AcquiaResponse {
   public function downloadLogs() {
     $uri = "environments/{$this->id}/logs/{$this->log_type}";
     $response = $this->client->getRequest($uri);
-//    $retrun = new AcquiaResponse($response, $this->client);
     return $response->getBody()->getContents();
-//    return $response;
+
   }
 
 }

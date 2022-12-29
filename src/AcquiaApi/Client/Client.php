@@ -47,11 +47,7 @@ class Client extends GClient
   }
 
   public function logs($log_types) {
-    $this->id = $log_types['id'];
-    $this->log_type = $log_types['log_type'];
-    $uri = 'environments/' . $log_types['id'] . '/logs';
-    $response = $this->getRequest($uri);
-    return new Logs($response, $this);
+    return new Logs($log_types, $this);
   }
 
   public function getRequest($uri, $options = [])
