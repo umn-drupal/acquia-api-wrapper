@@ -6,6 +6,7 @@ use Umndrupal\acquia_api\Response\Application;
 use Umndrupal\acquia_api\Response\Environment;
 use Umndrupal\acquia_api\Response\MultipleResponse;
 use Umndrupal\acquia_api\Response\Logs;
+use Umndrupal\acquia_api\Response\Notification;
 use GuzzleHttp\Client as GClient;
 use Umndrupal\acquia_api\Oauth\Provider;
 use Psr\Http\Message\RequestInterface;
@@ -48,6 +49,10 @@ class Client extends GClient
 
   public function logs($log_types) {
     return new Logs($log_types, $this);
+  }
+
+  public function notification($notification_id) {
+    return new Notification($notification_id, $this);
   }
 
   public function getRequest($uri, $options = [])
