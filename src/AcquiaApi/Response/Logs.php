@@ -79,11 +79,24 @@ class Logs extends AcquiaResponse {
     $start = $this->start_time;
     $end = $this->end_time;
     if (isset($start) && isset($end)) {
-      $uri = "environments/{$this->id}/logs/{$this->log_type}?{$this->start_time}&{$this->end_time}";
+      $body = [
+        'from' => $start,
+        'to' => $end,
+      ];
+      $encoded_body = json_encode($body);
+      $uri = "environments/{$this->id}/logs/{$this->log_type}";
+      $options = [
+        'headers' => [
+          'Content-Type' => 'application/x-www-form-urlencoded',
+        ],
+        'form_params' => $body,
+      ];
+      $response = $this->client->postRequest($uri, $options);
     } else {
       $uri = "environments/{$this->id}/logs/{$this->log_type}";
+      $response = $this->client->postRequest($uri);
     }
-    $response = $this->client->postRequest($uri);
+
     return new AcquiaResponse($response, $this->client);
   }
 
