@@ -83,7 +83,6 @@ class Logs extends AcquiaResponse {
         'from' => $start,
         'to' => $end,
       ];
-      $encoded_body = json_encode($body);
       $uri = "environments/{$this->id}/logs/{$this->log_type}";
       $options = [
         'headers' => [
