@@ -11,6 +11,20 @@ use GuzzleHttp\Client as GClient;
 use Umndrupal\acquia_api\Oauth\Provider;
 use Psr\Http\Message\RequestInterface;
 
+interface ClientInterface
+{
+  /**
+   * Sends a PSR-7 request and returns a PSR-7 response.
+   *
+   * @param RequestInterface $request
+   *
+   * @return ResponseInterface
+   *
+   * @throws \Psr\Http\Client\ClientExceptionInterface If an error happens while processing the request.
+   */
+  public function sendRequest(RequestInterface $request): ResponseInterface;
+}
+
 class Client extends GClient
 {
 
@@ -79,9 +93,9 @@ class Client extends GClient
    *
    * @return mixed|\Psr\Http\Message\ResponseInterface
    */
-  public function sendRequest(RequestInterface $request, array $options = [])
-  {
-    return $this->send($request, $options);
-  }
+//  public function sendRequest(RequestInterface $request, array $options = [])
+//  {
+//    return $this->send($request, $options);
+//  }
 
 }
