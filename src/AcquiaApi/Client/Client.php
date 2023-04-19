@@ -2,6 +2,7 @@
 
 namespace Umndrupal\acquia_api\Client;
 
+use Psr\Http\Message\ResponseInterface;
 use Umndrupal\acquia_api\Response\Application;
 use Umndrupal\acquia_api\Response\Environment;
 use Umndrupal\acquia_api\Response\MultipleResponse;
@@ -93,9 +94,9 @@ class Client extends GClient
    *
    * @return mixed|\Psr\Http\Message\ResponseInterface
    */
-//  public function sendRequest(RequestInterface $request, array $options = [])
-//  {
-//    return $this->send($request, $options);
-//  }
+  public function sendRequest(RequestInterface $request, array $options = []): ResponseInterface
+  {
+    return $this->send($request, $options);
+  }
 
 }
