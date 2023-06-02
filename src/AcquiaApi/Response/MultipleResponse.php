@@ -38,27 +38,27 @@ class MultipleResponse extends AcquiaResponse implements \Iterator
     ];
   }
 
-  public function current()
+  public function current(): mixed 
   {
     return $this->items[$this->position];
   }
 
-  public function next()
+  public function next(): void
   {
     $this->position += 1;
   }
 
-  public function key()
+  public function key(): mixed
   {
     return $this->position;
   }
 
-  public function valid()
+  public function valid(): bool
   {
     return (isset($this->items[$this->position]));
   }
 
-  public function rewind()
+  public function rewind(): void
   {
     $this->position = 0;
   }
