@@ -30,17 +30,6 @@ class Certificates extends AcquiaResponse {
     return $this->id;
   }
 
-  public function getCSRData(): array
-  {
-    return [
-      "country" => "US",
-      "state" => "Minnesota",
-      "locality" => "Minneapolis",
-      "organization" => "University of Minnesota",
-      "organizational_unit" => "OIT",
-    ];
-  }
-
   public function getCSR() {
     $uri = "environments/{$this->id}/ssl/csrs";
     $options = [
@@ -53,9 +42,8 @@ class Certificates extends AcquiaResponse {
   }
 
 
-  public function generateCSR($common_name, $csr_alternate_names=[]) {
+  public function generateCSR($csr_data, $common_name, $csr_alternate_names=[]) {
     $uri = "environments/{$this->id}/ssl/csrs";
-    $csr_data = $this->getCSRData();
     $csr_data["common_name"] = $common_name;
     $csr_data["alternate_names"] = $csr_alternate_names;
     $options = [
