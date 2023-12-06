@@ -66,4 +66,15 @@ class Certificates extends AcquiaResponse {
     $response = $this->client->postRequest($uri, $options);
     return new AcquiaResponse($response, $this->client);
   }
+
+  public function deleteCSR($id, $csrID) {
+    $uri = "environment/{$id}/ssl/csrs/{$csrID}";
+    $options = [
+      'headers' => [
+        'Content-Type' => 'application/hal+json',
+      ],
+    ];
+    $response = $this->client->delete($uri, $options);
+    return new AcquiaResponse($response, $this->client);
+  }
 }
