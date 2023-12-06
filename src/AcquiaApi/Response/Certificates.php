@@ -41,7 +41,7 @@ class Certificates extends AcquiaResponse {
   }
 
   public function getCSR($id) {
-    $uri = "environments/{$this->id}/ssl/csrs";
+    $uri = "environments/{$id}/ssl/csrs";
     $options = [
       'headers' => [
         'Content-Type' => 'application/hal+json',
