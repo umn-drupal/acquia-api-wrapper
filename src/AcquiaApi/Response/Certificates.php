@@ -22,6 +22,7 @@ class Certificates extends AcquiaResponse {
     $properties = [
       'id',
     ];
+    $this->id = $response['id'];
   }
 
   public function getEnvironment(): string
@@ -40,8 +41,8 @@ class Certificates extends AcquiaResponse {
     ];
   }
 
-  public function getCSR($id) {
-    $uri = "environments/{$id}/ssl/csrs";
+  public function getCSR() {
+    $uri = "environments/{$this->id}/ssl/csrs";
     $options = [
       'headers' => [
         'Content-Type' => 'application/hal+json',
@@ -52,7 +53,7 @@ class Certificates extends AcquiaResponse {
   }
 
 
-  public function generateCSR($id, $common_name, $csr_alternate_names=[]) {
+  public function generateCSR($common_name, $csr_alternate_names=[]) {
     $uri = "environments/{$this->id}/ssl/csrs";
     $csr_data = $this->getCSRData();
     $csr_data["common_name"] = $common_name;
