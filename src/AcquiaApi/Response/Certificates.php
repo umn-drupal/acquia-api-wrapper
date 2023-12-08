@@ -66,4 +66,22 @@ class Certificates extends AcquiaResponse {
     $response = $this->client->delete($uri, $options);
     return new AcquiaResponse($response, $this->client);
   }
+
+  public function getCertificates() {
+    $uri = "/environments/{$this->id}/ssl/certificates";
+    $options = [
+      'headers' => [
+        'Content-Type' => 'application/hal+json',
+      ],
+    ];
+    $response = $this->client->getRequest($uri, $options);
+    return $response->getBody()->getContents();
+  }
 }
+/*
+ * @todo
+ * Install certificate
+ * Delete certificate
+ * Activate cert
+ * Deactivate cert
+ */
