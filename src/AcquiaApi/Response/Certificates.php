@@ -77,11 +77,16 @@ class Certificates extends AcquiaResponse {
     $response = $this->client->getRequest($uri, $options);
     return $response->getBody()->getContents();
   }
+
+  public function installCertificate() {
+  }
+
+  public function deleteCertificate() {
+  }
+
+  public function activateCertificate() {
+  }
+
+  public function deactivateCertificate() {
+  }
 }
-/*
- * @todo
- * Install certificate
- * Delete certificate
- * Activate cert
- * Deactivate cert
- */
