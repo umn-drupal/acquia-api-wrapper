@@ -63,7 +63,7 @@ class Certificates extends AcquiaResponse {
         'Content-Type' => 'application/hal+json',
       ],
     ];
-    $response = $this->client->delete($uri, $options);
+    $response = $this->client->deleteRequest($uri, $options);
     return new AcquiaResponse($response, $this->client);
   }
 
@@ -78,15 +78,58 @@ class Certificates extends AcquiaResponse {
     return $response->getBody()->getContents();
   }
 
-  public function installCertificate() {
+  public function installCertificate($label, $legacy, $certificate, $private_key,
+    $ca_certificates, $flags, $expires_at, $domains, $csrID) {
+    $uri = "/environments/{$this->id}/ssl/certificates";
+    $cert_data["label"] = $label;
+    $cert_data["legacy"] = $legacy;
+    $cert_data["certificate"] = $certificate;
+    $cert_data["private_key"] = $private_key;
+    $cert_data["ca"] = $ca;
+    $cert_data["flags"] = $flags;
+    $cert_data["expires_at"] = $expires_at;
+    $cert_data["domains"] = $domains;
+    $cert_data["csrID"] = $csrID;
+    $options = [
+      'headers' => [
+        'Content-Type' => 'application/hal+json',
+      ],
+      'form_params' => $cert_data,
+    ];
+    $response = $this->client->postRequest($uri, $options);
+    return new AcquiaResponse($response, $this->client);
   }
 
-  public function deleteCertificate() {
+  public function deleteCertificate($id, $certID) {
+    $uri = "environment/{$id}/ssl/certificates/{$certID}";
+    $options = [
+      'headers' => [
+        'Content-Type' => 'application/hal+json',
+      ],
+    ];
+    $response = $this->client->deleteRequest($uri, $options);
+    return new AcquiaResponse($response, $this->client);
   }
 
-  public function activateCertificate() {
+  public function activateCertificate($id, $certID) {
+    $uri = "environment/{$id}/ssl/certificates/{$certID}/actions/activate";
+    $options = [
+      'headers' => [
+        'Content-Type' => 'application/hal+json',
+      ],
+    ];
+    $response = $this->client->postRequest($uri, $options);
+    return new AcquiaResponse($response, $this->client);
   }
 
-  public function deactivateCertificate() {
+  public function deactivateCertificate($id, $certID) {
+    $uri = "/environments/{$this->id}/ssl/certificates/actions/deactivate";
+    $options = [
+      'headers' => [
+        'Content-Type' => 'application/hal+json',
+      ],
+    ];
+    $response = $this->client->postRequest($uri, $options);
+    return new AcquiaResponse($response, $this->client);
   }
 }
