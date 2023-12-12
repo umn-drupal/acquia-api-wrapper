@@ -68,7 +68,7 @@ class Certificates extends AcquiaResponse {
   }
 
   public function getCertificates() {
-    $uri = "/environments/{$this->id}/ssl/certificates";
+    $uri = "environments/{$this->id}/ssl/certificates";
     $options = [
       'headers' => [
         'Content-Type' => 'application/hal+json',
@@ -78,18 +78,8 @@ class Certificates extends AcquiaResponse {
     return $response->getBody()->getContents();
   }
 
-  public function installCertificate($label, $legacy, $certificate, $private_key,
-    $ca_certificates, $flags, $expires_at, $domains, $csrID) {
-    $uri = "/environments/{$this->id}/ssl/certificates";
-    $cert_data["label"] = $label;
-    $cert_data["legacy"] = $legacy;
-    $cert_data["certificate"] = $certificate;
-    $cert_data["private_key"] = $private_key;
-    $cert_data["ca"] = $ca;
-    $cert_data["flags"] = $flags;
-    $cert_data["expires_at"] = $expires_at;
-    $cert_data["domains"] = $domains;
-    $cert_data["csrID"] = $csrID;
+  public function installCertificate($cert_data) {
+    $uri = "environments/{$this->id}/ssl/certificates";
     $options = [
       'headers' => [
         'Content-Type' => 'application/hal+json',
