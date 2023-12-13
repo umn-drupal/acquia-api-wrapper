@@ -91,7 +91,7 @@ class Certificates extends AcquiaResponse {
   }
 
   public function deleteCertificate($id, $certID) {
-    $uri = "environment/{$id}/ssl/certificates/{$certID}";
+    $uri = "environments/{$id}/ssl/certificates/{$certID}";
     $options = [
       'headers' => [
         'Content-Type' => 'application/hal+json',
@@ -102,7 +102,7 @@ class Certificates extends AcquiaResponse {
   }
 
   public function activateCertificate($id, $certID) {
-    $uri = "environment/{$id}/ssl/certificates/{$certID}/actions/activate";
+    $uri = "environments/{$id}/ssl/certificates/{$certID}/actions/activate";
     $options = [
       'headers' => [
         'Content-Type' => 'application/hal+json',
