@@ -90,8 +90,8 @@ class Certificates extends AcquiaResponse {
     return new AcquiaResponse($response, $this->client);
   }
 
-  public function deleteCertificate($id, $certID) {
-    $uri = "environments/{$id}/ssl/certificates/{$certID}";
+  public function deleteCertificate($certID) {
+    $uri = "environments/{$this->id}/ssl/certificates/{$certID}";
     $options = [
       'headers' => [
         'Content-Type' => 'application/hal+json',
