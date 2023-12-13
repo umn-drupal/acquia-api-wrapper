@@ -112,8 +112,8 @@ class Certificates extends AcquiaResponse {
     return new AcquiaResponse($response, $this->client);
   }
 
-  public function deactivateCertificate($id, $certID) {
-    $uri = "/environments/{$this->id}/ssl/certificates/actions/deactivate";
+  public function deactivateCertificate($certID) {
+    $uri = "environments/{$this->id}/ssl/certificates/{$certID}/actions/deactivate";
     $options = [
       'headers' => [
         'Content-Type' => 'application/hal+json',
