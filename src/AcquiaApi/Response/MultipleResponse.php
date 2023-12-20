@@ -27,7 +27,7 @@ class MultipleResponse extends AcquiaResponse implements \Iterator
     }, $this->getEmbeddedItems());
   }
 
-  protected function getValidTypes()
+  protected function getValidTypes(): array
   {
     return [
       'Application',
@@ -43,7 +43,7 @@ class MultipleResponse extends AcquiaResponse implements \Iterator
     return $this->items[$this->position];
   }
 
-  public function next()
+  public function next():void
   {
     $this->position += 1;
   }
@@ -58,7 +58,7 @@ class MultipleResponse extends AcquiaResponse implements \Iterator
     return (isset($this->items[$this->position]));
   }
 
-  public function rewind()
+  public function rewind():void
   {
     $this->position = 0;
   }
