@@ -38,7 +38,7 @@ class MultipleResponse extends AcquiaResponse implements \Iterator
     ];
   }
 
-  public function current()
+  public function current():mixed
   {
     return $this->items[$this->position];
   }
@@ -48,12 +48,12 @@ class MultipleResponse extends AcquiaResponse implements \Iterator
     $this->position += 1;
   }
 
-  public function key()
+  public function key():int
   {
     return $this->position;
   }
 
-  public function valid()
+  public function valid():bool
   {
     return (isset($this->items[$this->position]));
   }
@@ -63,7 +63,7 @@ class MultipleResponse extends AcquiaResponse implements \Iterator
     $this->position = 0;
   }
 
-  public function __toString()
+  public function __toString():string
   {
     $count = count($this->items);
     return "This is a collection of {$count} {$this->responseType} items.\n";
