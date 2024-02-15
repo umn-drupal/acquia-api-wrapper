@@ -30,12 +30,12 @@ class Backup extends AcquiaResponse
   /**
    * @var string
    */
-  protected $started;
+  protected $started_at;
 
   /**
    * @var string
    */
-  protected $completed;
+  protected $completed_at;
 
   public function __construct($response, Client $client)
   {
