@@ -35,22 +35,22 @@ class Environment extends AcquiaResponse
   /**
    * @var string
    */
-  protected $activeDomain;
+  protected $active_domain;
 
   /**
    * @var string
    */
-  protected $defaultDomain;
+  protected $default_domain;
 
   /**
    * @var string
    */
-  protected $imageUrl;
+  protected $image_url;
 
   /**
    * @var string
    */
-  protected $sshUrl;
+  protected $ssh_url;
 
   /**
    * @var string
