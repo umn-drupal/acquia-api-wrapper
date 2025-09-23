@@ -35,6 +35,7 @@ class MultipleResponse extends AcquiaResponse implements \Iterator
       'Environment',
       'Cron',
       'Backup',
+      'Tokens',
     ];
   }
 
