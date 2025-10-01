@@ -5,14 +5,20 @@ namespace Umndrupal\acquia_api\Response;
 use Umndrupal\acquia_api\Client\Client;
 
 class Tokens extends AcquiaResponse {
+
   /**
    * @var \Umndrupal\acquia_api\Client\Client
    */
   protected $client;
 
-
+  /**
+   * @var string|mixed
+   */
   protected string $uuid;
 
+  /**
+   * @var string|mixed
+   */
   protected string $label;
 
 
