@@ -33,9 +33,9 @@ class Keys extends AcquiaResponse {
   public function __construct($response, Client $client) {
     parent::__construct($response, $client);
     $this->client = $client;
-    $this->uuid = $response['uuid'];
-    $this->label = $response['label'];
-    $this->public_key = $response['public_key'];
+    $this->uuid = isset($response['uuid']) ? $response['uuid'] : '';
+    $this->label = isset($response['label']) ? $response['label'] : '';
+    $this->public_key = isset($response['public_key']) ? $response['public_key'] : '';
 //    $this->response = $response;
   }
 
@@ -51,17 +51,18 @@ class Keys extends AcquiaResponse {
 //    return new AcquiaResponse($response, $this->client);
 //  }
 //
-//  public function createTokens() {
-//    $uri = "account/tokens";
-//    $label['label'] = $this->label;
-//    $label_json = json_encode($label);
-//    $options = [
-//      'headers' => [
-//        'Content-Type' => 'application/json',
-//      ],
-//      'body' => $label_json,
-//    ];
-//    $response = $this->client->postRequest($uri, $options);
-//    return new AcquiaResponse($response, $this->client);
-//  }
+  public function addKeys() {
+    $uri = "account/ssh-keys";
+    $key_info['label'] = $this->label;
+    $key_info['public_key'] = $this->public_key;
+    $key_json = json_encode($key_info);
+    $options = [
+      'headers' => [
+        'Content-Type' => 'application/json',
+      ],
+      'body' => $key_json,
+    ];
+    $response = $this->client->postRequest($uri, $options);
+    return new AcquiaResponse($response, $this->client);
+  }
 }
