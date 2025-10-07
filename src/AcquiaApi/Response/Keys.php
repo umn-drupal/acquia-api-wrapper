@@ -45,12 +45,12 @@ class Keys extends AcquiaResponse {
     return new MultipleResponse($response, $this->client, 'Keys');
   }
 
-//  public function deleteTokens() {
-//    $uri = "account/tokens/{$this->uuid}";
-//    $response = $this->client->deleteRequest($uri);
-//    return new AcquiaResponse($response, $this->client);
-//  }
-//
+  public function deleteKeys() {
+    $uri = "account/ssh-keys/{$this->uuid}";
+    $response = $this->client->deleteRequest($uri);
+    return new AcquiaResponse($response, $this->client);
+  }
+
   public function addKeys() {
     $uri = "account/ssh-keys";
     $key_info['label'] = $this->label;
